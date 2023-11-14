@@ -22,6 +22,11 @@ builder.Services.AddAuthorization(configure =>
 builder.Services.AddSingleton<IAuthorizationHandler, EmployeePolicyHandler>();
 
 
+builder.Services.AddHttpClient("WebApi", httpClient =>
+{
+    httpClient.BaseAddress = new Uri("https://localhost:7283/");
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
