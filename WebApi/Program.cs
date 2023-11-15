@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -29,6 +30,11 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = false,
         ClockSkew = TimeSpan.Zero,
     };
+});
+
+builder.Services.AddAuthorization(configure =>
+{
+    configure.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin"));
 });
 
 var app = builder.Build();

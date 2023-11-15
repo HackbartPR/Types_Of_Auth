@@ -19,7 +19,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Login([FromBody] Credential credential)
         {
-            if (credential.Username != "Admin" && credential.Password != "123")
+            if (credential.UserName != "Admin" && credential.Password != "123")
             {
                 ModelState.AddModelError("Unauthorized", "You are not authorized to access this endpoint");
                 return Unauthorized(ModelState);
@@ -29,7 +29,7 @@ namespace WebApi.Controllers
             {
                 new Claim("Admin", "true"),
                 new Claim("ProbationDate", "2023-07-01"),
-                new Claim("UserName", credential.Username),
+                new Claim("UserName", credential.UserName),
             };
 
             DateTime expiryTime = DateTime.UtcNow.AddMinutes(10);
